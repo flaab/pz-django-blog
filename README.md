@@ -31,8 +31,6 @@ A bootstrapped and complete blog engine that blends into django-admin and works 
 - Django >= 2.2.6
 - Markdown
 - Hashlib
-- Urllib
-- Json
 
 ## Installation
 Create a directory and clone the project.
