@@ -62,10 +62,34 @@ If all went well, the server is up and running:
 
 Use the admin site to add content: http://127.0.0.1:8000/admin. 
 
-## Settings 
-If you run the blog as an app in a bigger project, delete the following line from *mysite/urls.py*.
+## Running the blog in a existing Django Site
+
+The above instructions will create a new Django project that will run the blog. If you did that, you can skip this section. If on the other hand, you want to include the blog in your existing application, then another course of action is needed. Add the following lines in your *settings.py*:
+
 ```
-path('', include(('blog.urls', 'blogdefault'), namespace = 'blogdefault')),
+INSTALLED_APPS = (
+    # ...
+    'blog',
+)
+```
+
+Add the following lines in your *urls.py*:
+
+```
+from blog.sitemaps import PostSiteMap, CategorySiteMap, TagSiteMap
+sitemaps = {
+    # ...
+    'posts': PostSiteMap,
+    'categories': CategorySiteMap,
+    'tags': TagSiteMap,
+}
+urlpatterns = [
+    # ...,
+    path('blog/', include(('blog.urls', 'blog'), namespace = 'blog')),
+    path('sitemap.xml', sitemap, {'sitemaps': sitemaps}, name = 'django.contrib.settings.views.sitemap'),
+]
+if(settings.DEBUG):
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT
 ```
 
 ## Getting started
