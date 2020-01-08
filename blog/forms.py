@@ -1,7 +1,5 @@
 from django import forms
 from .models import Comment
-from captcha.fields import ReCaptchaField 
-from captcha.widgets import ReCaptchaV2Checkbox
 
 class CommentForm(forms.ModelForm):
     """ Implements a form for a comment """
