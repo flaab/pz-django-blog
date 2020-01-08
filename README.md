@@ -126,6 +126,7 @@ The templates are organized in three categories: extendable templates, includabl
 ## To-do
 - Ability to ban commentators
 - Posting ping notifications
+- Archive browsing by year and month
 - Nested comments
 - Theming support
 - Contact form
