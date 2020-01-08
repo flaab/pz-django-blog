@@ -17,7 +17,7 @@ class BlogConfig(AppConfig):
     meta_title          = "My Blog"                                    # Meta Title
     header_title        = "Django<strong>Blog</strong>"                # Header Title
     header_description  = "A reusable blog app developed for Django"   # Header Description
-    footer              = "Proudly powered by Django-Blog"
+    footer              = "Proudly powered by PZ-Django-Blog"          # Footer message
 
     # Recaptcha
     recaptcha_enabled   = True
