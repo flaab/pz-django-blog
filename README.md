@@ -52,7 +52,7 @@ Point your browser to django-admin: http://127.0.0.1:8000/admin and...
 - Write your first post
 
 ## Customize the templates
-The templates are organized in three categories: extendable templates, includable templates and page templates. Each uses a different naming convention. The templates the application uses are the following, which you can edit to fit your needs. Stylesheets and Javascript files are hotlinked from cdn repositories.
+The templates are organized in three categories: extendable templates, includable templates and page templates. Each uses a different naming convention. The templates the application uses are the following, which you can edit to fit your needs. Stylesheets and Javascript files are hotlinked from cdn repositories but you can place your own under *blog/static/*.
 
 - *templates/blog/__l_base.html* => Base layout for the blog
 - *templates/blog/_sideposts.html* => Template tag to display recent and most commented posts
