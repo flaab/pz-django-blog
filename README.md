@@ -8,7 +8,7 @@ A bootstrapped and complete blog engine that blends into django-admin and works 
 
 - Mark-down posts and flatpages
 - Multiple authors with bio and avatar
-- Moderated comments with Recaptcha
+- Moderated comments with gravatars and recaptcha
 - Browseable categories and tags
 - Embeddable media galleries
 - Built-in search engine
