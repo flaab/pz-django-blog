@@ -70,6 +70,7 @@ The above instructions will create a new Django project that will run the blog. 
 SITE_ID = 1 
 INSTALLED_APPS = (
     # ...
+    'django.contrib.staticfiles',
     'django.contrib.sitemaps',
     'blog',
 )
@@ -82,6 +83,7 @@ Add the following lines in your *urls.py*:
 
 ```
 from blog.sitemaps import PostSiteMap, CategorySiteMap, TagSiteMap
+from django.conf.urls.static import static
 sitemaps = {
     # ...
     'posts': PostSiteMap,
