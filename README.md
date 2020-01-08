@@ -1,4 +1,5 @@
 # A wordpress alternative for Django Sites
+
 A wordpress alternative for Django sites. A bootstrapped and full-fledged blog engine that blends into django-admin. It implements markdown posts and flatpages, multiple authors, categories, tags, galleries, moderated comments with recaptcha, search engine, related posts, discussion pages, social sharing, json-ld schemas, RSS feed and sitemap.
 
 ## Requirements
