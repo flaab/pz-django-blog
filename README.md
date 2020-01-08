@@ -10,7 +10,7 @@ A bootstrapped and complete blog engine that blends into django-admin and works 
 - Multiple authors with bio and avatar
 - Moderated comments with Recaptcha
 - Browseable categories and tags
-- Embeddeable media galleries
+- Embeddable media galleries
 - Built-in search engine
 - Discussion pages
 - Json-ld schemas
