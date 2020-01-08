@@ -2,6 +2,8 @@
 
 A bootstrapped and complete blog engine that blends into django-admin and works right out of the box.
 
+![PZ-Django-Blog](https://www.dropbox.com/s/sqoj5n950ei4kv3/pz-django-blog.png?raw=1)
+
 ## Features
 
 - Mark-down posts and flatpages
@@ -20,7 +22,6 @@ A bootstrapped and complete blog engine that blends into django-admin and works 
 
 The templates are bootstrap-ready and fully customizable.
 
-![PZ-Django-Blog](https://www.dropbox.com/s/sqoj5n950ei4kv3/pz-django-blog.png?raw=1)
 
 ## Requirements
 - Python >= 3.0
