@@ -70,8 +70,12 @@ The above instructions will create a new Django project that will run the blog. 
 SITE_ID = 1 
 INSTALLED_APPS = (
     # ...
+    'django.contrib.sitemaps',
     'blog',
 )
+STATIC_URL = '/static/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')
+MEDIA_URL = '/media/'
 ```
 
 Add the following lines in your *urls.py*:
