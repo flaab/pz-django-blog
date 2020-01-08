@@ -1,6 +1,24 @@
 # A wordpress alternative for Django Sites
 
-A bootstrapped and full-fledged blog engine that blends into django-admin. It implements markdown posts and flatpages, multiple authors, categories, tags, galleries, moderated comments with recaptcha, search engine, related posts, discussion pages, social sharing, json-ld schemas, RSS feed and sitemap.
+A bootstrapped and complete blog engine that blends into django-admin and works right out of the box.
+
+## Features
+
+- Mark-down posts and flatpages
+- Multiple authors with bio and avatar
+- Moderated comments with Recaptcha
+- Browseable categories and tags
+- Embeddeable media galleries
+- Built-in search engine
+- Discussion pages
+- Json-ld schemas
+- Social sharing
+- Related posts
+- Atom RSS feed
+- Sticky posts
+- Sitemap
+
+The templates are bootstrap-ready and fully customizable.
 
 ![PZ-Django-Blog](https://www.dropbox.com/s/sqoj5n950ei4kv3/pz-django-blog.png?raw=1)
 
@@ -70,7 +88,7 @@ The templates are organized in three categories: extendable templates, includabl
 - *templates/blog/post_detail.html* => Page template for post details.
 - *templates/_pagination.html* => Includable template to display pagination links.
 
-## Todo
+## To-do
 - Ability to ban commentators
 - Posting ping notifications
 - Nested comments
