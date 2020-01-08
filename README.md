@@ -15,14 +15,14 @@ $ python3 manage.py makemigrations
 $ python3 manage.py migrate
 ```
 Create a superuser for django-admin.
-````
+```
 $ python3 manage.py createsuperuser
 ```
 If all went well, run the server.
 ```
 $ python3 manage.py runserver
 ```
-The blog is available at http://127.0.0.1:8000 and will be empty of content.
-Refer to the admin site to start adding content: http://127.0.0.1:8000/admin. 
+The blog is now available at: http://127.0.0.1:8000.
+Use the admin site to add content: http://127.0.0.1:8000/admin. 
 
 # Getting started
