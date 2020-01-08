@@ -1,0 +1,12 @@
+<!-- ==== Tags start ===== -->
+<div class="card mt-0 mb-4">
+    <h5 class="card-header">Tags</h5>
+    <div class="card-body">
+        <h6 class="h4 mb-0">
+            {% for tag in tags %}
+            <a href="{% url 'blog:post_list_by_tag' tag.name %}" class="badge badge-pill badge-light mb-2">#{{ tag.name }}</a> &nbsp;
+            {% endfor %}
+        <h6>
+    </div>
+</div>
+<!-- ==== Tags end ==== -->

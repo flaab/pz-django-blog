@@ -1,0 +1,38 @@
+{% load blog_tags %}
+<div id="comment" class="card mt-0 mb-5">
+    <div class="card-body pl-5 pr-5 pb-4 pt-5">
+        {% if new_comment %}
+            <h2 class="mb-2">Thank you!</h2>
+            <p class="lead mb-4">Your comment has been sent and it is pending moderation.</p>
+        {% else %}
+            <h2 class="mb-2">Leave a comment</h2>
+            <p class="mb-4">Your email address will not be published.</p>
+            <form action=".#comment" method="post">
+                {% for field in comment_form.visible_fields %}
+                    <div class="form-group row">
+                        <label for="{{ field.label }}" class="col-sm-2 col-form-label">{{ field.label }}</label>
+                        <div class="col-sm-10">
+                            {{ field }}
+                        </div>
+                    </div>
+                {% endfor %}
+                <!-- {{ comment_form.as_p }} -->
+                {% csrf_token %}
+
+                {% if recaptcha_enabled %}
+                <div class="form-grup row">
+                    <div class="col-sm-2">&nbsp;</div>
+                    <div class="col-sm-10">
+                        <script src='https://www.google.com/recaptcha/api.js'></script>
+                        <div class="g-recaptcha" data-sitekey="{% app_attr 'recaptcha_sitekey' %}"></div>
+                    </div>
+                </div>
+                {% endif %}
+                <div class="form-group row mt-3">
+                    <label for="submit" class="col-sm-2 col-form-label">&nbsp;</label>
+                    <div class="col-sm-10"><input type="submit" class="btn btn-secondary" value="Add Comment"></div> 
+                </div>
+            </form>
+        {% endif %}
+    </div>
+</div>

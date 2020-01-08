@@ -1,0 +1,190 @@
+{% extends "blog/__l_base.html" %}
+{% load blog_tags %}
+{% block title %}{{ post.get_meta_title|capfirst }} - {{ block.super }}{% endblock %}
+{% block meta_description %}{{ post.get_meta_description }}{% endblock %}
+{% block extra_head %}
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <meta property="og:type" content="article"/>
+    <meta property="og:title" content="{{ post.get_meta_title }}"/>
+    <meta property="og:description" content="{{ post.get_meta_description }}"/>
+    <meta property="og:site_name" content="{% app_attr 'meta_title' %}"/>
+    <meta property="article:author" content="{{ post.author.profile }}"/>
+    {% for tag in post.tags.all %}
+        <meta property="article:tag" content="{{ tag.name|capfirst }}"/>
+    {% endfor %}
+    <meta property="article:section" content="{{ post.category.name }}"/>
+    <meta property="article:published_time" content="{{ post.publish }}"/>
+    <meta property="article:modified_time" content="{{ post.updated }}"/>
+    <meta property="og:updated_time" content="{{ post.created }}"/>
+    {% if post.cover_image %}
+        <meta property="og:image" content="{{ host }}{{ MEDIA_URL}}{{ post.cover_image }}"/>
+    {% endif %}
+    {% if canonical %}
+        <meta property="og:url" content="{{ canonical }}"/>
+        <link rel="canonical" href="{{ canonical }}" />
+    {% endif %}
+{% endblock %}
+
+<!-- ==== Content Start ==== -->
+{% block content %}
+
+    <!-- ==== Schema Start ==== -->
+    <script type="application/ld+json">
+    {{ verbatim }} { {{ endverbatim }}
+        "@context": "https://schema.org", 
+        "@type": "BlogPosting",
+        "headline": "{{ post.get_meta_title }}",
+        "alternativeHeadline": "{{ post.title }}",
+        {% if post.cover_image %}
+        "image": "{{ host }}{{ MEDIA_URL }}{{ post.cover_image }}",
+        {% endif %}
+        "genre": "{{ post.category }}", 
+        "keywords": "{{ post.tags.all|join:',' }}",
+        "wordcount": "{{ post.body|wordcount }}",
+        "publisher": "{% app_attr 'meta_title' %}",
+        {% if canonical %}
+        "url": "{{ canonical }}",
+        {% endif %}
+        "datePublished": "{{ post.publish|date:'Y-m-d' }}",
+        "dateCreated": "{{ post.created|date:'Y-m-d' }}",
+        "dateModified": "{{ post.updated|date:'Y-m-d' }}",
+        "description": "{{ post.get_meta_description }}",
+        "articleBody": "{{ post.body|markdown|striptags|truncatewords:50 }}",
+        "author": 
+        {{ verbatim }} { {{ endverbatim }}
+            "@type": "Person",
+            "name": "{{ post.author.profile }}"
+        {{ verbatim }} } {{ endverbatim }}
+    {{ verbatim }} } {{ endverbatim }}
+    </script>
+    <!-- ==== Schema End ==== -->
+
+    <!-- ==== Post Start ==== -->
+    <div class="card mt-0 mb-5">
+        {% if post.cover_image %}
+            <img class="card-img-top" src="{{ MEDIA_URL }}{{ post.cover_image }}" alt="{{ post.title|capfirst }}">
+        {% endif %}
+        <div class="card-body pl-5 pr-5 pb-4 pt-4">
+            <h1 class="mb-4 mt-2 h2">{{ post.title|capfirst }}</h1>
+            {{ post.body|markdown }}
+            
+            <!-- ==== Sharing Start ==== -->
+            <p class="lead text-left mt-4">
+                <a href="https://www.facebook.com/sharer/sharer.php?u={{ canonical|urlencode }}" 
+                    class="fa fa-facebook text-dark align-middle" 
+                    target="_blank"
+                    style="font-size: 25px; text-decoration: none;"></a> &nbsp;&nbsp;
+                <a href="https://twitter.com/home?status={{ canonical|urlencode }}" 
+                    class="fa fa-twitter text-dark align-middle" 
+                    target="_blank"
+                    style="font-size: 25px; text-decoration: none;"></a> &nbsp;&nbsp;
+                <a href="https://pinterest.com/pin/create/button/?url={{ canonical|urlencode }}&amp;media=&amp;description={{ post.get_meta_description|urlencode }}" 
+                    class="fa fa-pinterest text-dark align-middle" 
+                    target="_blank"
+                    style="font-size: 25px; text-decoration: none;"></a> &nbsp;&nbsp;
+                <a href="https://www.reddit.com/submit?url={{ canonical|urlencode }}" 
+                    class="fa fa-reddit text-dark align-middle" 
+                    target="_blank"
+                    style="font-size: 25px; text-decoration: none;"></a> &nbsp;&nbsp;
+                <a href="https://www.linkedin.com/shareArticle?mini=true&url={{ canonical|urlencode }}&amp;title={{ post.get_meta_title|urlencode }}&summary={{ post.get_meta_description|urlencode }}&source=" 
+                    class="fa fa-linkedin text-dark align-middle" 
+                    target="_blank"
+                    style="font-size: 25px; text-decoration: none;"></a> &nbsp;&nbsp;
+                <a href="https://profitquery.com/add-to/delicious/?url={{ canonical|urlencode }}&amp;title={{ post.get_meta_title|urlencode }}" 
+                    class="fa fa-delicious text-dark align-middle" 
+                    style="font-size: 25px; text-decoration: none;"></a> &nbsp;&nbsp;
+                <a href="http://www.digg.com/submit?url={{ canonical|urlencode }}" 
+                    class="fa fa-digg text-dark align-middle" 
+                    target="_blank"
+                    style="font-size: 25px; text-decoration: none;"></a>
+            </p>
+            <!-- ==== Sharing End ==== -->
+            
+            <!-- ==== Grid Image Gallery Start ==== -->
+            {% if post.gallery %}
+                <hr class="mt-5 mb-4"  />
+                <div class="container">
+                {% for field in post.gallery.get_all_images %}
+                    {% cycle 'odd' 'even' as divbytwo silent %}
+                    {% if divbytwo == 'odd' %}<div class="row">{% endif %}
+                    <div class="col-sm pt-2 pb-2">
+                        <a href="{{ MEDIA_URL }}{{ field }}" title="{{ post.title|capfirst }}">
+                            <img class="img-fluid img-thumbnail" src="{{ MEDIA_URL }}{{ field }}" alt="{{ post.title|capfirst }}">
+                        </a>
+                    </div>
+                    {% if divbytwo == 'even' %}</div>{% endif %}
+                {% endfor %} 
+                </div>
+            {% endif %}
+            <!-- ==== Grid Image Gallery End ==== -->
+            
+            <!-- ==== Similar Start ==== -->
+            {% if similar_posts %}
+                <hr class="mt-5 mb-0"  />
+                <h4 class="mt-4 mb-3">Related posts</h4>
+                <ul style="mb-0">
+                {% for post in similar_posts %}
+                    <li><a href="{{ post.get_absolute_url }}" class="text-muted" title="{{ post.title|capfirst }}">{{ post.title|capfirst }}</a></li>
+                {% endfor %}
+                </ul>
+            {% endif %}
+            <!-- ==== Similar End ==== -->
+            
+
+            <hr class="mt-5 mb-0"  />
+            <h4 class="mt-4 mb-4">Published by</h4>
+            <div class="media">
+                <img width="80" src="{{ post.author.profile.get_avatar }}" class="mr-3 rounded" alt="{{ post.author.profile }}">
+                <div class="media-body">
+                    <h5 class="mt-0">
+                        {{ post.author.profile }}
+                    </h5>
+                    <p>
+                        {% if post.author.profile.bio %}
+                            {{ post.author.profile.bio|linebreaksbr }} 
+                        {% endif %}
+                        <a class="text-muted" href="{% url 'blog:post_list_by_author' post.author.id %}">View all posts by {{ post.author.profile }}</a>
+                    </p>
+                </div>
+            </div>
+        </div>
+        <div class="card-footer text-muted">
+            {{ post.publish|date:"M d, Y" }} &nbsp;&nbsp;
+            <span class="badge badge-secondary">
+                <a href="{% url 'blog:post_list_by_category' post.category.slug %}" class="text-white">{{ post.category }}</a>
+            </span>
+            {% for tag in post.tags.all %}
+                <span class="badge badge-light">
+                    <a href="{% url 'blog:post_list_by_tag' tag.slug %}" class="text-dark">#{{ tag.name }}</a>
+                </span>
+            {% endfor %}
+        </div>
+    </div>
+    
+    <!-- ==== Comments start ==== -->
+    {% if comments.count > 0 %}
+        <div class="card mt-0 mb-5">
+            <div class="card-body pl-5 pr-5 pb-2 pt-4">
+                <h2 class="mb-5 mt-3">{{ comment_count }} comment{{ comment_count|pluralize }}</h2>
+                <ul class="list-unstyled">
+                {% for comment in comments %}
+                    {% include "blog/_comment.html" %}
+                {% endfor %}
+                </ul>
+                {% if comment_count > comments.count%}
+                    <a href="{{ post.get_discussion_url }}" role="button" class="btn btn-secondary btn-block mt-4 mb-4">Go to discussion ({{ comment_count }})</a>
+                {% endif %}
+            </div>
+        </div>
+    {% endif %}
+    <!-- ==== Comments End ==== -->
+
+    <!-- ==== New Comment Start ==== -->
+    {% if post.comments_enabled %}
+        {% include "blog/_comment_form.html" %}
+    {% endif %}
+    <!-- ==== New Commend End ==== -->
+
+{% endblock %}
+<!-- ==== Content End ==== -->

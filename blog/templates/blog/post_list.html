@@ -1,0 +1,74 @@
+{% extends "blog/__l_base.html" %}
+{% load blog_tags %}
+{% block title %}{% if meta_title %}{{ meta_title|capfirst }} - {% endif %}{{ block.super }}{% endblock %}
+{% block meta_description %}{% if meta_description %}{{ meta_description }}{% endif %}{% endblock %}
+{% block extra_head %}
+    {% if canonical %}
+        <link rel="canonical" href="{{ canonical }}" />
+    {% endif %}
+{% endblock %}
+{% block content %}
+    {% if query %}
+        <div class="card mt-0 mb-5">
+            <div class="card-body pb-3">
+                <h1 class="h2">Search results for: "{{ query|title }}"</h1>
+            </div>
+        </div>
+    {% elif category %}
+        <div class="card mt-0 mb-5">
+            <div class="card-body pb-3">
+                <h1 class="card-title h2">Category: {{ category.name|title }}</h1>
+                {% if category.description %}
+                <hr />
+                <p class="lead">{{ category.description }}</p>
+                {% endif %}
+            </div>
+        </div>
+    {% elif author %}
+        <div class="card mt-0 mb-5 pt-4 pl-4 pr-4 pb-2">
+            <div class="media">
+                <img width="100" src="{{ author.profile.get_avatar }}" class="mr-3 rounded" alt="{{ author.profile }}">
+                <div class="media-body pl-2">
+                    <h2 class="mt-0">
+                        {{ author.profile }}
+                    </h2>
+                    {% if author.profile.bio %}
+                    <p class="lead">{{ author.profile.bio|linebreaksbr }}</p>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    {% elif tag %}
+        <div class="card mt-0 mb-5">
+            <div class="card-body pb-3">
+                <h1 class="card-title h2">Tag: {{ tag.name|title }}</h1>
+            </div>
+        </div>
+    {% endif %}
+    {% for post in posts %}
+        <div class="card mt-0 mb-5">
+            {% if post.cover_image %}
+                <a href="{{ post.get_absolute_url }}" title="{{ post.title|capfirst }}">
+                    <img class="card-img-top" src="{{ MEDIA_URL }}{{ post.cover_image }}" alt="{{ post.title|capfirst }}">
+                </a>
+            {% endif %}
+            <div class="card-body pl-5 pr-5 pb-4 pt-4">
+                <h2 class="card-title mt-2"><a href="{{ post.get_absolute_url }}" class="text-dark">{{ post.title|capfirst }}</a></h2>
+                <p class="card-text mt-4">{{ post.body|markdown|striptags|truncatewords_html:50 }}</p>
+                <a href="{{ post.get_absolute_url }}" class="btn btn-light mt-4 mb-2"><strong>Continue reading</strong></a>
+            </div>
+            <div class="card-footer text-muted">
+                    {{ post.publish|date:"M d, Y" }} &nbsp;&nbsp;
+                    <span class="badge badge-secondary">
+                        <a href="{% url 'blog:post_list_by_category' post.category.slug %}" class="text-white">{{ post.category }}</a>
+                    </span>
+                    {% for tag in post.tags.all %}
+                        <span class="badge badge-light">
+                            <a href="{% url 'blog:post_list_by_tag' tag.slug %}" class="text-dark">#{{ tag.name }}</a>
+                        </span>
+                    {% endfor %}
+            </div>
+        </div>
+    {% endfor %}
+    {% include "_pagination.html" with page=posts %}
+{% endblock %}

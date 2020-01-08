@@ -1,0 +1,10 @@
+<!-- ==== Comment Start ===== -->
+<li class="media mt-4">
+    <img src="{{ comment.gravatar_url }}" class="mr-3 rounded" width="44" alt="{{ comment.name }}">
+    <div class="media-body">
+        <p class="mb-2"><strong>{{ comment.name }}</strong> &nbsp; <small class="text-muted">{{ comment.created|date:"M d, Y"}} ({{ comment.created|timesince }} ago)</small></p>
+        <p style="font-size: 90%;" class="mb-2">{{ comment.body|linebreaksbr }}</p>
+        <!-- <p class="small"><a href="#" class="text-muted">Reply</a></p> -->
+    </div>
+</li>
+<!-- ==== Comment end End ==== -->

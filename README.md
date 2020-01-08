@@ -1,0 +1,1 @@
+A wordpress alternative for Django sites. A full-fledged blog engine that blends into django-admin and implements markdown posts, multiple authors, categories, tags, flatpages, image galleries, comments with moderation, seach engine, related posts, discussion pages, atom rss and sitemaps.

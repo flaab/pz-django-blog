@@ -1,0 +1,14 @@
+<!-- ==== Latest posts start ===== -->
+<div class="card my-4">
+    <h5 class="card-header">{{ group_name }}</h5>
+    <div class="card-body">
+        <ul class="list-group list-group-flush">
+            {% for post in post_list %}
+                <li class="list-group-item small">
+                    <a href="{{ post.get_absolute_url }}" class="text-dark">{{ post.title|capfirst }}</a>
+                </li>
+            {% endfor %}
+        </ul>
+    </div>
+</div>
+<!-- ==== Latest posts end ===== -->

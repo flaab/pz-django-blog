@@ -1,0 +1,69 @@
+{% extends "blog/__l_base.html" %}
+{% load blog_tags %}
+{% block title %}Discussion: {{ post.get_meta_title|capfirst }} - {{ block.super }}{% endblock %}
+{% block meta_description %}{{ post.get_meta_description }}{% endblock %}
+{% block extra_head %}
+<meta name="robots" content="noindex" />
+{% endblock %}
+
+<!-- ==== Content Start ==== -->
+{% block content %}
+        
+    <div class="card mt-0 mb-5">
+        <div class="card-body pb-3">
+            <h1 class="h2">Discussion</h1>
+        </div>
+    </div>
+        
+    <!-- === Post Info ==== -->
+    <div class="card mt-0 mb-5 pt-4">
+        <div class="media pl-4">
+            {% if post.cover_image %}
+                <img width="30%" src="{{ MEDIA_URL }}{{ post.cover_image }}" class="mr-3 rounded" alt="{{ post.title|capfirst }}">
+            {% endif %}
+            <div class="media-body pl-2 pr-4">
+                <h2 class="mt-0 h3">{{ post.title|capfirst }}</h2>
+                {% if post.body %}
+                    <p>{{ post.body|markdown|striptags|truncatewords:40 }}</p>
+                {% endif %}
+            </div>
+        </div>
+        <div class="card-footer text-muted mt-3">
+            {{ post.publish|date:"M d, Y" }} &nbsp;&nbsp;
+            <span class="badge badge-secondary">
+                <a href="{% url 'blog:post_list_by_category' post.category.slug %}" class="text-white">{{ post.category }}</a>
+            </span>
+            {% for tag in post.tags.all %}
+                <span class="badge badge-light">
+                    <a href="{% url 'blog:post_list_by_tag' tag.slug %}" class="text-dark">#{{ tag.name }}</a>
+                </span>
+            {% endfor %}
+        </div>
+    </div>
+    <!-- ==== Post Info End ==== -->
+
+    <!-- ==== Comments start ==== -->
+    {% if comment_count > 0 %}
+        <div class="card mt-0 mb-5">
+            <div class="card-body pl-5 pr-5 pb-2 pt-4 pb-4">
+                <h2 class="mb-5 mt-3">{{ comment_count }} comment{{ comment_count|pluralize }}</h2>
+                <ul class="list-unstyled">
+                {% for comment in comments %}
+                    {% include "blog/_comment.html" %}
+                {% endfor %}
+                </ul>
+            </div>
+        </div>
+    {% endif %}
+    <!-- ==== Comments End ==== -->
+    
+    {% include "_pagination.html" with page=comments %}
+
+    <!-- ==== New Comment Start ==== -->
+    {% if post.comments_enabled %}
+        {% include "blog/_comment_form.html" %}
+    {% endif %}
+    <!-- ==== New Commend End ==== -->
+
+{% endblock %}
+<!-- ==== Content End ==== -->

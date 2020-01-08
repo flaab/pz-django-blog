@@ -1,0 +1,44 @@
+{% extends "blog/__l_base.html" %}
+{% load blog_tags %}
+{% block title %}{{ page.get_meta_title|capfirst }} - {{ block.super }}{% endblock %}
+{% block meta_description %}{{ page.get_meta_description }}{% endblock %}
+{% block extra_head %}
+    {% if canonical %}
+        <link rel="canonical" href="{{ canonical }}" />
+    {% endif %}
+{% endblock %}
+
+<!-- ==== Content Start ==== -->
+{% block content %}
+
+    <!-- ==== Page Start ==== -->
+    <div class="card mt-0 mb-5">
+        {% if page.cover_image %}
+            <img class="card-img-top" src="{{ MEDIA_URL }}{{ page.cover_image }}" alt="{{ page.title|capfirst }}">
+        {% endif %}
+        <div class="card-body pl-5 pr-5 pb-4 pt-4">
+            <h1 class="mb-4 mt-2 h2">{{ page.title|capfirst }}</h1>
+            {{ page.body|markdown }}
+            
+            <!-- ==== Grid Image Gallery Start ==== -->
+            {% if post.gallery %}
+                <hr class="mt-5 mb-4"  />
+                <div class="container">
+                {% for field in post.gallery.get_all_images %}
+                    {% cycle 'odd' 'even' as divbytwo silent %}
+                    {% if divbytwo == 'odd' %}<div class="row">{% endif %}
+                    <div class="col-sm pt-2 pb-2">
+                        <a href="{{ MEDIA_URL }}{{ field }}" title="{{ post.title|capfirst }}">
+                            <img class="img-fluid img-thumbnail" src="{{ MEDIA_URL }}{{ field }}" alt="{{ post.title|capfirst }}">
+                        </a>
+                    </div>
+                    {% if divbytwo == 'even' %}</div>{% endif %}
+                {% endfor %} 
+                </div>
+            {% endif %}
+            <!-- ==== Grid Image Gallery End ==== -->
+
+        </div>
+    </div>
+{% endblock %}
+<!-- ==== Content End ==== -->
