@@ -2,7 +2,7 @@
 
 A bootstrapped and full-fledged blog engine that blends into django-admin. It implements markdown posts and flatpages, multiple authors, categories, tags, galleries, moderated comments with recaptcha, search engine, related posts, discussion pages, social sharing, json-ld schemas, RSS feed and sitemap.
 
-![PZ-Django-Blog](https://www.dropbox.com/s/bktcx2u98lm9ve2/pz-django-blog.png?raw=1)
+![PZ-Django-Blog](https://www.dropbox.com/s/sqoj5n950ei4kv3/pz-django-blog.png?raw=1)
 
 ## Requirements
 - Python >= 3.0
