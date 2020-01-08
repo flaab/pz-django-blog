@@ -1,6 +1,6 @@
 # A wordpress alternative for Django Sites
 
-A bootstrapped and complete blog engine that blends into django-admin and works right out of the box.
+A bootstrapped and complete blog engine that blends into django-admin and works as desired right out of the box.
 
 ![PZ-Django-Blog](https://www.dropbox.com/s/sqoj5n950ei4kv3/pz-django-blog.png?raw=1)
 
@@ -20,8 +20,11 @@ A bootstrapped and complete blog engine that blends into django-admin and works 
 - Sticky posts
 - Sitemap
 
-The templates are bootstrap-ready and fully customizable.
+## What makes it different?
 
+- It is a complete engine that works out of the box
+- The templates are bootstrap-ready and fully customizable
+- It does not depend on foreign apps
 
 ## Requirements
 - Python >= 3.0
