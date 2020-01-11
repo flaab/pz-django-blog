@@ -1,3 +1,4 @@
 django>=2.2.6
 markdown
 hashlib
+pillow
