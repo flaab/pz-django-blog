@@ -21,6 +21,10 @@
 <!-- ==== Body Start ==== -->
 <body class="bg-light">
 
+    <!-- ==== Flash messages ==== -->
+    {% include '_messages.html' %}
+    <!-- ==== End messages ==== -->
+
     <!-- ==== Nav ==== -->
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark mb-5">
         <a class="navbar-brand" href="{% url 'blog:post_list' %}">
