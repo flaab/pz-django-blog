@@ -1,7 +1,7 @@
 from django.db import models
 from django.utils import timezone
 from django.contrib.auth.models import User
-from django.db.models.signals import post_save
+from django.db.models.signals import post_save, post_delete
 from django.utils.safestring import mark_safe
 from django.dispatch import receiver
 from django.urls import reverse
@@ -43,6 +43,11 @@ class Profile(models.Model):
     def get_absolute_url(self):
         return reverse('blog:post_list_by_author', args=[str(self.user.id),])
 
+# Signal to delete avatar on profile deletion
+@receiver(post_delete, sender = Profile)
+def delete_user_profile(sender, instance, **kwargs):
+    """ Deletes media objects on deletion of this model """
+    instance.avatar.delete(False)  
 
 # Signal to sync profile to user on sql transactions
 @receiver(post_save, sender = User)
@@ -143,6 +148,21 @@ class PhotoGallery(models.Model):
         else:
             return "Gallery created on "+ created
 
+# Delete gallery files on deletion
+@receiver(post_delete, sender = PhotoGallery)
+def delete_photogallery_images(sender, instance, **kwargs):
+    """ Deletes media objects on deletion of this model """
+    instance.image1.delete(False)  
+    instance.image2.delete(False)  
+    instance.image3.delete(False)  
+    instance.image4.delete(False)  
+    instance.image5.delete(False)  
+    instance.image6.delete(False)  
+    instance.image7.delete(False)  
+    instance.image8.delete(False)  
+    instance.image9.delete(False)  
+    instance.image10.delete(False)  
+
 #----------------------------------------
 
 class PublishedManager(models.Manager):
@@ -216,6 +236,12 @@ class Post(models.Model):
                                                  self.publish.strftime('%d'),
                                                  self.slug])
 
+# Delete cover image on deletion
+@receiver(post_delete, sender = Post)
+def delete_post_image(sender, instance, **kwargs):
+    """ Deletes media objects on deletion of this model """
+    instance.cover_image.delete(False)  
+
 #----------------------------------------
 
 class Flatpage(models.Model):
@@ -264,6 +290,12 @@ class Flatpage(models.Model):
     
     class Meta:
         ordering = ('-status',)
+
+# Delete cover image on deletion
+@receiver(post_delete, sender = Flatpage)
+def delete_page_image(sender, instance, **kwargs):
+    """ Deletes media objects on deletion of this model """
+    instance.cover_image.delete(False)  
 
 #----------------------------------------
 
