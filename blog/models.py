@@ -2,6 +2,7 @@ from django.db import models
 from django.utils import timezone
 from django.contrib.auth.models import User
 from django.db.models.signals import post_save, post_delete
+from django.utils.translation import gettext_lazy as _
 from django.utils.safestring import mark_safe
 from django.dispatch import receiver
 from django.urls import reverse
@@ -14,10 +15,15 @@ import hashlib
 
 class Profile(models.Model):
     """ User profile to extend the user model with bio and avatar """
-    user = models.OneToOneField(User, on_delete = models.CASCADE)
-    bio = models.TextField(max_length=500, blank = True, null = True, help_text = "Public bio for the blog app")
-    avatar = models.ImageField(upload_to ='profile/%Y/%m/%d/', blank = True, null = True, help_text = "Squared dimensions if possible, please.")
+    user = models.OneToOneField(User, on_delete = models.CASCADE, verbose_name = _('User'))
+    bio = models.TextField(max_length=500, blank = True, null = True, help_text = _('Public bio for the Blog'))
+    avatar = models.ImageField(upload_to ='profile/%Y/%m/%d/', blank = True, null = True, 
+                               help_text = _('Please upload an squared image'))
 
+    class Meta:
+        verbose_name = _("Profile")
+        verbose_name_plural = _("Profiles")
+    
     def get_avatar(self):
         """ Returns the avatar for this user or the gravatar url """
         if not self.avatar:
@@ -42,6 +48,7 @@ class Profile(models.Model):
     
     def get_absolute_url(self):
         return reverse('blog:post_list_by_author', args=[str(self.user.id),])
+    
 
 # Signal to delete avatar on profile deletion
 @receiver(post_delete, sender = Profile)
@@ -61,15 +68,16 @@ def create_or_update_user_profile(sender, instance, created, **kwargs):
 class Category(models.Model):
     """ Categories """
 
-    name = models.CharField(max_length = 80, help_text="Enter a descriptive and unique category name.")
-    slug = models.SlugField(max_length = 250, help_text="The slug is used to link category pages.")
-    description = models.TextField(null = True, blank = True, 
-                                    help_text="Describe what readers can find in this category in plain text. Optional.")
-    created = models.DateTimeField(auto_now_add = True) 
-    updated = models.DateTimeField(auto_now_add = True)
+    name = models.CharField(max_length = 80, verbose_name = _('Name'), help_text=_('Enter a descriptive and unique category name'))
+    slug = models.SlugField(max_length = 250, help_text=_('The slug is used to link category pages'))
+    description = models.TextField(null = True, blank = True, verbose_name = _('Description'), 
+                                    help_text=_("Describe what readers can find in this category"))
+    created = models.DateTimeField(auto_now_add = True, verbose_name = _('Created')) 
+    updated = models.DateTimeField(auto_now = True, verbose_name = _('Updated'))
     
     class Meta:
-        verbose_name_plural = "Categories"
+        verbose_name = _("Category")
+        verbose_name_plural = _("Categories")
         ordering = ('created',)
     
     def get_post_count(self):
@@ -88,13 +96,14 @@ class Category(models.Model):
 class Tag(models.Model):
     """ Tags """
 
-    name = models.CharField(max_length = 80, help_text = "Enter a descriptive tag name.")
-    slug = models.SlugField(max_length = 250, help_text = "The slug is used to link to tag pages.")
-    created = models.DateTimeField(auto_now_add = True) 
-    updated = models.DateTimeField(auto_now_add = True)
+    name = models.CharField(max_length = 80, help_text = _('Enter a descriptive tag name'), verbose_name = _('Name'))
+    slug = models.SlugField(max_length = 250, help_text = _('The slug is used to link to tag pages'))
+    created = models.DateTimeField(auto_now_add = True, verbose_name = _('Created')) 
+    updated = models.DateTimeField(auto_now = True, verbose_name = _('Updated'))
     
     class Meta:
-        verbose_name_plural = "Tags"
+        verbose_name = _("Tag")
+        verbose_name_plural = _("Tags")
         ordering = ('created',)
     
     def get_absolute_url(self):
@@ -114,9 +123,10 @@ class Tag(models.Model):
 class PhotoGallery(models.Model):
     """ A photo gallery can have up to ten images """
 
-    title    = models.CharField(max_length = 250, help_text = "A clear name facilitates usage of the gallery in other posts.")
-    image1   = models.ImageField(upload_to ='gallery/%Y/%m/%d/', help_text = "At least two images are mandatory to create a gallery.")
-    image2   = models.ImageField(upload_to ='gallery/%Y/%m/%d/', help_text = "At least two images are mandatory to create a gallery.")
+    title    = models.CharField(max_length = 250, verbose_name = _('Title'), 
+                                                  help_text = _('A clear name facilitates usage of the gallery in other posts'))
+    image1   = models.ImageField(upload_to ='gallery/%Y/%m/%d/', help_text = _('At least two images are mandatory to create a gallery.'))
+    image2   = models.ImageField(upload_to ='gallery/%Y/%m/%d/', help_text = _('At least two images are mandatory to create a gallery.'))
     image3   = models.ImageField(upload_to ='gallery/%Y/%m/%d/', blank = True, null = True)
     image4   = models.ImageField(upload_to ='gallery/%Y/%m/%d/', blank = True, null = True)
     image5   = models.ImageField(upload_to ='gallery/%Y/%m/%d/', blank = True, null = True)
@@ -125,12 +135,13 @@ class PhotoGallery(models.Model):
     image8   = models.ImageField(upload_to ='gallery/%Y/%m/%d/', blank = True, null = True)
     image9   = models.ImageField(upload_to ='gallery/%Y/%m/%d/', blank = True, null = True)
     image10  = models.ImageField(upload_to ='gallery/%Y/%m/%d/', blank = True, null = True)
-    created  = models.DateTimeField(auto_now_add = True)
-    updated  = models.DateTimeField(auto_now = True)
+    created = models.DateTimeField(auto_now_add = True, verbose_name = _('Created')) 
+    updated = models.DateTimeField(auto_now = True, verbose_name = _('Updated'))
     
     class Meta:
         ordering = ('-created',)
-        verbose_name_plural = "Photo Galleries"
+        verbose_name = _('Photo Gallery')
+        verbose_name_plural = _('Photo Galleries')
 
     def get_all_images(self):
         """ Returns all images of this gallery ready to be src """
@@ -146,7 +157,7 @@ class PhotoGallery(models.Model):
         if(self.title):
             return self.title
         else:
-            return "Gallery created on "+ created
+            return _('Gallery created on ')+ created
 
 # Delete gallery files on deletion
 @receiver(post_delete, sender = PhotoGallery)
@@ -174,28 +185,35 @@ class Post(models.Model):
     """ Blog posts """
     
     STATUS_CHOICES = (
-        ('draft', 'Draft'),
-        ('published', 'Published'),
+        ('draft', _('Draft')),
+        ('published', _('Published')),
     )
     
-    author = models.ForeignKey(User, related_name = 'blog_posts', on_delete = models.CASCADE)
-    category = models.ForeignKey(Category, related_name = 'blog_posts', on_delete = models.CASCADE)
-    title = models.CharField(max_length=250)
+    author = models.ForeignKey(User, related_name = 'blog_posts', on_delete = models.CASCADE, verbose_name = _('Author'))
+    category = models.ForeignKey(Category, related_name = 'blog_posts', on_delete = models.CASCADE, verbose_name = _('Category'))
+    title = models.CharField(max_length=250, verbose_name = _('Title'))
     slug = models.SlugField(max_length=250, unique_for_date='publish')
-    meta_title = models.CharField(max_length = 250, blank = True, null = True, help_text = "Meta Title for this post. Optional.")
-    meta_description = models.CharField(max_length = 250, blank = True, null = True, help_text = "Meta description for this post. Optional.")
-    body = models.TextField(help_text = "Type your blog post using plain text or mark-down format. "+ 
-                                        "Please note that H1 is already used by the post title.")
-    tags = models.ManyToManyField(Tag, related_name="tags")
-    cover_image = models.ImageField(upload_to ='blog/%Y/%m/%d/', blank = True, null = True)
+    meta_title = models.CharField(max_length = 250, blank = True, null = True, 
+                                  verbose_name = 'Meta title', 
+                                  help_text = _("Optional SEO meta-title for this post"))
+    meta_description = models.CharField(max_length = 250, blank = True, null = True, 
+                                        verbose_name = 'Meta description', 
+                                        help_text = _("Optional SEO meta-description for this post"))
+    body = models.TextField(verbose_name = _('Body'), 
+                            help_text = _("Type the post using plain text/mark-down format and don't use H1 headers"))
+    tags = models.ManyToManyField(Tag, related_name="tags", verbose_name = _('tags'))
+    cover_image = models.ImageField(upload_to ='blog/%Y/%m/%d/', blank = True, null = True, verbose_name = _('Cover image'))
     gallery = models.ForeignKey(PhotoGallery, related_name = 'blog_posts', on_delete = models.CASCADE, blank = True, null = True,
-                                help_text = "Create or link a photo gallery.")
-    publish = models.DateTimeField(default=timezone.now)
-    status = models.CharField(max_length=10, choices=STATUS_CHOICES, default='draft')
-    comments_enabled = models.BooleanField(default = False, help_text = "Enable or disable public comments for this post.")
-    sticky = models.BooleanField(default = False, help_text = "Sticky posts are listed above all others regardless of date.")
-    created = models.DateTimeField(auto_now_add=True)
-    updated = models.DateTimeField(auto_now=True)
+                                verbose_name = _('Gallery'), help_text = _("Create or link a photo gallery"))
+    publish = models.DateTimeField(default=timezone.now, verbose_name=_('Published'))
+    status = models.CharField(max_length=10, choices=STATUS_CHOICES, default='draft', verbose_name = _('Status'))
+    comments_enabled = models.BooleanField(default = False, 
+                                           verbose_name = _('Comments'), 
+                                           help_text = _("Enable or disable public comments for this post"))
+    sticky = models.BooleanField(default = False, verbose_name = _('Sticky'), 
+                                                  help_text = _("Sticky posts are listed above all others regardless of date"))
+    created = models.DateTimeField(auto_now_add = True, verbose_name = _('Created')) 
+    updated = models.DateTimeField(auto_now = True, verbose_name = _('Updated'))
 
     # Our managers
     objects = models.Manager() # The default manager.
@@ -220,6 +238,8 @@ class Post(models.Model):
 
     class Meta:
         ordering = ('-publish',)
+        verbose_name = _('Post')
+        verbose_name_plural = _('Posts')
 
     def __str__(self):
         return self.title
@@ -248,24 +268,27 @@ class Flatpage(models.Model):
     """ Flat pages, not belonging to the blog """
     
     STATUS_CHOICES = (
-        ('draft', 'Draft'),
-        ('published', 'Published'),
+        ('draft', _('Draft')),
+        ('published', _('Published')),
     )
     
-    author = models.ForeignKey(User, related_name = 'flat_pages', on_delete = models.CASCADE)
-    title = models.CharField(max_length = 250)
+    author = models.ForeignKey(User, related_name = 'flat_pages', on_delete = models.CASCADE, verbose_name = _('Author'))
+    title = models.CharField(max_length = 250, verbose_name = _('Title'))
     slug = models.SlugField(max_length = 250, unique_for_date = 'created')
-    meta_title = models.CharField(max_length = 250, blank = True, null = True, help_text = "Meta Title for this flatpage. Optional.")
+    meta_title = models.CharField(max_length = 250, blank = True, null = True, 
+                                  verbose_name = _('Meta title'), 
+                                  help_text = _("Optional SEO meta-title for this flatpage"))
     meta_description = models.CharField(max_length = 250, blank = True, null = True, 
-                                        help_text = "Meta description for this flatpage. Optional.")
-    body = models.TextField(help_text = "Type this flatpage using plain text or mark-down format. "+ 
-                                        "Please note that H1 is already used by the post title.")
-    cover_image = models.ImageField(upload_to = 'flatpage/%Y/%m/%d/', blank = True, null = True)
+                                        verbose_name = _('Meta description'), 
+                                        help_text = _("Optional SEO meta-description for this flatpage"))
+    body = models.TextField(verbose_name = _('Body'), help_text = _("Content of this page in plain text/mark-down format, without H1 tags"))
+    cover_image = models.ImageField(upload_to = 'flatpage/%Y/%m/%d/', blank = True, null = True, verbose_name = _('Cover Image'))
     gallery = models.ForeignKey(PhotoGallery, related_name = 'flat_pages', on_delete = models.CASCADE, blank = True, null = True,
-                                help_text = "Create or link a photo gallery.")
-    status = models.CharField(max_length = 10, choices = STATUS_CHOICES, default = 'draft')
-    created = models.DateTimeField(auto_now_add = True)
-    updated = models.DateTimeField(auto_now = True)
+                                verbose_name = _('Gallery'),
+                                help_text = _("Create or link a photo gallery."))
+    status = models.CharField(max_length = 10, choices = STATUS_CHOICES, default = 'draft', verbose_name = _('Status'))
+    created = models.DateTimeField(auto_now_add = True, verbose_name = _('Created')) 
+    updated = models.DateTimeField(auto_now = True, verbose_name = _('Updated'))
 
     # Our managers
     objects = models.Manager()     # The default manager.
@@ -290,6 +313,8 @@ class Flatpage(models.Model):
     
     class Meta:
         ordering = ('-status',)
+        verbose_name = _('Flatpage')
+        verbose_name_plural = _('Flatpages')
 
 # Delete cover image on deletion
 @receiver(post_delete, sender = Flatpage)
@@ -302,12 +327,12 @@ def delete_page_image(sender, instance, **kwargs):
 class Comment(models.Model):
     """ Comments """
 
-    post = models.ForeignKey(Post, on_delete = models.CASCADE, related_name = 'comments')
-    name = models.CharField(max_length = 80)
+    post = models.ForeignKey(Post, on_delete = models.CASCADE, related_name = 'comments', verbose_name = _('Post'))
+    name = models.CharField(max_length = 80, verbose_name = _('Name'))
     email = models.EmailField()
-    body = models.TextField()
-    created = models.DateTimeField(auto_now_add = True) 
-    updated = models.DateTimeField(auto_now_add = True)
+    body = models.TextField(verbose_name = _('Body'))
+    created = models.DateTimeField(auto_now_add = True, verbose_name = _('Created')) 
+    updated = models.DateTimeField(auto_now = True, verbose_name = _('Updated'))
     active = models.BooleanField(default = False)
 
     def approve(self):
@@ -337,6 +362,8 @@ class Comment(models.Model):
     
     class Meta:
         ordering = ('created',)
+        verbose_name = _('Comment')
+        verbose_name_plural = _('Comments')
 
     def __str__(self):
         """ Returns the comment as humanized string """

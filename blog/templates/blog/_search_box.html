@@ -1,9 +1,10 @@
+{% load i18n %}
 {% load blog_tags %}
 <!-- ==== Search Start ===== -->
 <form class="form-inline my-2 my-lg-0" action="{% url 'blog:post_search' %}" method="get">
     {% for field in form.visible_fields %}
         {{ field }}
     {% endfor %}
-    <input type="submit" class="btn btn-secondary my-2 my-sm-0" value="Search">
+    <input type="submit" class="btn btn-secondary my-2 my-sm-0" value="{% trans 'Search' %}">
 </form>
 <!-- ==== Search End ==== -->

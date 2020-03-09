@@ -1,5 +1,6 @@
 from django.apps import AppConfig
 from django.conf import settings
+from django.utils.translation import gettext_lazy as _
 
 class BlogConfig(AppConfig):
     
@@ -13,11 +14,11 @@ class BlogConfig(AppConfig):
     verbose_name  = "Django Blog"
     
     # Application settings 
-    pagination          = 5                                            # Pagination elements
-    meta_title          = "My Blog"                                    # Meta Title
-    header_title        = "Django<strong>Blog</strong>"                # Header Title
-    header_description  = "A reusable blog app developed for Django"   # Header Description
-    footer              = "Proudly powered by PZ-Django-Blog"          # Footer message
+    pagination          = 5                                             # Pagination elements
+    meta_title          = _('My Blog')                                  # Meta Title
+    header_title        = "Django<strong>Blog</strong>"                 # Header Title
+    header_description  = _('A reusable blog app developed for Django') # Header Description
+    footer              = _('Proudly powered by PZ-Django-Blog')        # Footer message
 
     # Recaptcha
     recaptcha_enabled   = True

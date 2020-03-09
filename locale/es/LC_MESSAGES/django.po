@@ -1,0 +1,373 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2020-03-09 22:00+0100\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: blog/admin.py:13
+msgid "Blog User Profile"
+msgstr "Perfil para Blog"
+
+#: blog/admin.py:118
+msgid "Approve selected comments"
+msgstr "Aprobar comentarios seleccionado/s"
+
+#: blog/admin.py:129
+msgid "Reject selected comments"
+msgstr "Rechazar comentarios seleccionado/s"
+
+#: blog/apps.py:18
+msgid "My Blog"
+msgstr "Mi Blog"
+
+#: blog/apps.py:20
+msgid "A reusable blog app developed for Django"
+msgstr "Una aplicación de Blog para Django"
+
+#: blog/apps.py:21
+msgid "Proudly powered by PZ-Django-Blog"
+msgstr "Orgullosamente desarrollado por pz-django-blog"
+
+#: blog/forms.py:14
+msgid "Search for..."
+msgstr "Buscar..."
+
+#: blog/models.py:18
+msgid "User"
+msgstr "Usuario"
+
+#: blog/models.py:19
+msgid "Public bio for the Blog"
+msgstr "Biografía para el Blog"
+
+#: blog/models.py:21
+msgid "Please upload an squared image"
+msgstr "Imagenes cuadradas por favor"
+
+#: blog/models.py:24
+msgid "Profile"
+msgstr "Perfil"
+
+#: blog/models.py:25
+msgid "Profiles"
+msgstr "Perfiles"
+
+#: blog/models.py:71 blog/models.py:99 blog/models.py:331
+msgid "Name"
+msgstr "Nombre"
+
+#: blog/models.py:71
+msgid "Enter a descriptive and unique category name"
+msgstr "Introduce una categoría descriptiva y única"
+
+#: blog/models.py:72
+msgid "The slug is used to link category pages"
+msgstr "El slug se usa para generar enlaces de categoría"
+
+#: blog/models.py:73
+msgid "Description"
+msgstr "Descripción"
+
+#: blog/models.py:74
+msgid "Describe what readers can find in this category"
+msgstr "Descripción de esta categoría"
+
+#: blog/models.py:75 blog/models.py:101 blog/models.py:138 blog/models.py:215
+#: blog/models.py:290 blog/models.py:334
+msgid "Created"
+msgstr "Creado"
+
+#: blog/models.py:76 blog/models.py:102 blog/models.py:139 blog/models.py:216
+#: blog/models.py:291 blog/models.py:335
+msgid "Updated"
+msgstr "Actualizado"
+
+#: blog/models.py:79 blog/models.py:193 blog/templates/blog/post_list.html:21
+msgid "Category"
+msgstr "Categoría"
+
+#: blog/models.py:80 blog/templates/blog/_categories.html:4
+msgid "Categories"
+msgstr "Categorías"
+
+#: blog/models.py:99
+msgid "Enter a descriptive tag name"
+msgstr "Introduce una etiqueta corta y descriptiva"
+
+#: blog/models.py:100
+msgid "The slug is used to link to tag pages"
+msgstr "El slug se usa para generar enlaces de etiqueta"
+
+#: blog/models.py:105 blog/templates/blog/post_list.html:45
+msgid "Tag"
+msgstr "Etiqueta"
+
+#: blog/models.py:106 blog/templates/blog/_tags.html:4
+msgid "Tags"
+msgstr "Etiquetas"
+
+#: blog/models.py:126 blog/models.py:194 blog/models.py:276
+msgid "Title"
+msgstr "Título"
+
+#: blog/models.py:127
+msgid "A clear name facilitates usage of the gallery in other posts"
+msgstr "Un nombre claro y conciso facilita la reutilización de la galería"
+
+#: blog/models.py:128 blog/models.py:129
+msgid "At least two images are mandatory to create a gallery."
+msgstr "Por lo menos dos imágenes son necesarias para crear una galería"
+
+#: blog/models.py:143
+msgid "Photo Gallery"
+msgstr "Galeria de imágenes"
+
+#: blog/models.py:144
+msgid "Photo Galleries"
+msgstr "Galerías de imágenes"
+
+#: blog/models.py:160
+msgid "Gallery created on "
+msgstr "Galería creada el"
+
+#: blog/models.py:188 blog/models.py:271
+msgid "Draft"
+msgstr "Borrador"
+
+#: blog/models.py:189 blog/models.py:272
+msgid "Published"
+msgstr "Publicado"
+
+#: blog/models.py:192 blog/models.py:275
+msgid "Author"
+msgstr "Autor"
+
+#: blog/models.py:198
+msgid "Optional SEO meta-title for this post"
+msgstr "Meta título SEO opcional para este post"
+
+#: blog/models.py:201
+msgid "Optional SEO meta-description for this post"
+msgstr "Meta descripción opcional para este post"
+
+#: blog/models.py:202 blog/models.py:284 blog/models.py:333
+msgid "Body"
+msgstr "Cuerpo"
+
+#: blog/models.py:203
+msgid ""
+"Type the post using plain text/mark-down format and don't use H1 headers"
+msgstr "Escribe el post en texto o mark-down, sin cabeceras H1"
+
+#: blog/models.py:204
+msgid "tags"
+msgstr "Etiquetas"
+
+#: blog/models.py:205
+msgid "Cover image"
+msgstr "Imagen de cabecera"
+
+#: blog/models.py:207 blog/models.py:287
+msgid "Gallery"
+msgstr "Galería"
+
+#: blog/models.py:207
+msgid "Create or link a photo gallery"
+msgstr "Crear o enlazar una galería de imágenes"
+
+#: blog/models.py:209 blog/models.py:289
+msgid "Status"
+msgstr "Estado"
+
+#: blog/models.py:211 blog/models.py:366
+msgid "Comments"
+msgstr "Comentarios"
+
+#: blog/models.py:212
+msgid "Enable or disable public comments for this post"
+msgstr "Activar o desactivar comentarios para este post"
+
+#: blog/models.py:213
+msgid "Sticky"
+msgstr "Pegajoso"
+
+#: blog/models.py:214
+msgid "Sticky posts are listed above all others regardless of date"
+msgstr "Las entradas pegajosos siempre se muestran encima de todos los demás"
+
+#: blog/models.py:241 blog/models.py:330
+msgid "Post"
+msgstr "Entrada"
+
+#: blog/models.py:242
+msgid "Posts"
+msgstr "Entradas"
+
+#: blog/models.py:279
+msgid "Meta title"
+msgstr "Meta título"
+
+#: blog/models.py:280
+msgid "Optional SEO meta-title for this flatpage"
+msgstr "Meta título opcional SEO para esta página estática"
+
+#: blog/models.py:282
+msgid "Meta description"
+msgstr "Meta descripción"
+
+#: blog/models.py:283
+msgid "Optional SEO meta-description for this flatpage"
+msgstr "Meta descripción opcional para esta página estática"
+
+#: blog/models.py:284
+msgid "Content of this page in plain text/mark-down format, without H1 tags"
+msgstr "Contenido de esta página en texto plano o markdown, sin cabeceras H1"
+
+#: blog/models.py:285
+msgid "Cover Image"
+msgstr "Imagen de cabecera"
+
+#: blog/models.py:288
+msgid "Create or link a photo gallery."
+msgstr "Crear o enlazar una galéria de imágenes"
+
+#: blog/models.py:316
+msgid "Flatpage"
+msgstr "Páginas estática"
+
+#: blog/models.py:317
+msgid "Flatpages"
+msgstr "Páginas estáticas"
+
+#: blog/models.py:365
+msgid "Comment"
+msgstr "Comentario"
+
+#: blog/templates/_pagination.html:6 blog/templates/_pagination.html:8
+msgid "First"
+msgstr "Primera"
+
+#: blog/templates/_pagination.html:28 blog/templates/_pagination.html:30
+msgid "Last"
+msgstr "Última"
+
+#: blog/templates/blog/_comment_form.html:6
+msgid "Thank you!"
+msgstr "Gracias!"
+
+#: blog/templates/blog/_comment_form.html:7
+msgid "Your comment has been sent and it is pending moderation."
+msgstr "Tu comentario ha sido enviado y se encuentra pendiente de moderación."
+
+#: blog/templates/blog/_comment_form.html:9
+msgid "Leave a comment"
+msgstr "Escribe un comentario"
+
+#: blog/templates/blog/_comment_form.html:10
+msgid "Your email address will not be published."
+msgstr "Tu dirección de email no será publicada."
+
+#: blog/templates/blog/_comment_form.html:32
+msgid "Add Comment"
+msgstr "Enviar Comentario"
+
+#: blog/templates/blog/_search_box.html:8
+msgid "Search"
+msgstr "Buscar"
+
+#: blog/templates/blog/post_detail.html:126
+msgid "Related posts"
+msgstr "Entradas relacionadas"
+
+#: blog/templates/blog/post_detail.html:137
+msgid "Published by"
+msgstr "Publicado por"
+
+#: blog/templates/blog/post_detail.html:149
+msgid "View all posts by"
+msgstr "Ver todas las entradas de"
+
+#: blog/templates/blog/post_detail.html:182
+msgid "Go to discussion"
+msgstr "Ir a discusión"
+
+#: blog/templates/blog/post_discussion.html:4
+#: blog/templates/blog/post_discussion.html:15
+msgid "Discussion"
+msgstr "Discusión"
+
+#: blog/templates/blog/post_list.html:15
+msgid "Search results for"
+msgstr "Resultados de búsqueda para"
+
+#: blog/templates/blog/post_list.html:59
+msgid "Continue reading"
+msgstr "Continuar leyendo"
+
+#: blog/templatetags/blog_tags.py:44
+msgid "Recent posts"
+msgstr "Entradas recientes"
+
+#: blog/templatetags/blog_tags.py:49
+msgid "Most commented"
+msgstr "Más comentadas"
+
+#: blog/views.py:34
+msgid "The search string was too short, please try again."
+msgstr "La cadena de búsqueda es demasiado corta, inténtalo de nuevo."
+
+#: blog/views.py:38
+#, python-format
+msgid "Search results for %(query)s"
+msgstr "Resultados de búsqueda para %(query)s"
+
+#: blog/views.py:39
+#, python-format
+msgid "Search results in posts for %(query)s"
+msgstr "Resultados de búsqueda en entradas para %(query)s"
+
+#: mysite/settings.py:100
+msgid "English"
+msgstr "Inglés"
+
+#: mysite/settings.py:101
+msgid "Spanish"
+msgstr "Español"
+
+#: mysite/settings.py:102
+msgid "German"
+msgstr "Alemán"
+
+#: mysite/settings.py:103
+msgid "Italian"
+msgstr "Italiano"
+
+#: mysite/settings.py:104
+msgid "French"
+msgstr "Frances"
+
+#: mysite/settings.py:105
+msgid "Russian"
+msgstr "Ruso"
+
+#: mysite/settings.py:106
+msgid "Japanese"
+msgstr "Japonés"
+
+#: mysite/settings.py:107
+msgid "Portuguese"
+msgstr "Portugués"

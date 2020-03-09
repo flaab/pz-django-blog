@@ -1,4 +1,5 @@
 {% extends "blog/__l_base.html" %}
+{% load i18n %}
 {% load blog_tags %}
 {% block title %}{% if meta_title %}{{ meta_title|capfirst }} - {% endif %}{{ block.super }}{% endblock %}
 {% block meta_description %}{% if meta_description %}{{ meta_description }}{% endif %}{% endblock %}
@@ -11,13 +12,13 @@
     {% if query %}
         <div class="card mt-0 mb-5">
             <div class="card-body pb-3">
-                <h1 class="h2">Search results for: "{{ query|title }}"</h1>
+                <h1 class="h2">{% trans "Search results for" %}: "{{ query|title }}"</h1>
             </div>
         </div>
     {% elif category %}
         <div class="card mt-0 mb-5">
             <div class="card-body pb-3">
-                <h1 class="card-title h2">Category: {{ category.name|title }}</h1>
+                <h1 class="card-title h2">{% trans "Category" %}: {{ category.name|title }}</h1>
                 {% if category.description %}
                 <hr />
                 <p class="lead">{{ category.description }}</p>
@@ -41,7 +42,7 @@
     {% elif tag %}
         <div class="card mt-0 mb-5">
             <div class="card-body pb-3">
-                <h1 class="card-title h2">Tag: {{ tag.name|title }}</h1>
+                <h1 class="card-title h2">{% trans "Tag" %}: {{ tag.name|title }}</h1>
             </div>
         </div>
     {% endif %}
@@ -55,7 +56,7 @@
             <div class="card-body pl-5 pr-5 pb-4 pt-4">
                 <h2 class="card-title mt-2"><a href="{{ post.get_absolute_url }}" class="text-dark">{{ post.title|capfirst }}</a></h2>
                 <p class="card-text mt-4">{{ post.body|markdown|striptags|truncatewords_html:50 }}</p>
-                <a href="{{ post.get_absolute_url }}" class="btn btn-light mt-4 mb-2"><strong>Continue reading</strong></a>
+                <a href="{{ post.get_absolute_url }}" class="btn btn-light mt-4 mb-2"><strong>{% trans "Continue reading" %}</strong></a>
             </div>
             <div class="card-footer text-muted">
                     {{ post.publish|date:"M d, Y" }} &nbsp;&nbsp;

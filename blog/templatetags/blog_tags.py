@@ -3,6 +3,7 @@ from ..models import Post, Category, Tag
 from django.db.models import Count 
 from ..forms import CommentForm, SearchForm
 from django.utils.safestring import mark_safe
+from django.utils.translation import gettext_lazy as _
 from django.apps import apps
 import markdown
 
@@ -40,11 +41,11 @@ def search_box():
     return{'form': form}
 
 @register.inclusion_tag('blog/_sideposts.html')
-def show_latest_posts(count = 5, group_name = 'Recent posts'):
+def show_latest_posts(count = 5, group_name = _('Recent posts')):
     post_list = Post.published.order_by('-publish')[:count]
     return{'post_list': post_list, 'group_name': group_name}
 
 @register.inclusion_tag('blog/_sideposts.html')
-def show_commented_posts(count = 5, group_name = 'Most commented'):
+def show_commented_posts(count = 5, group_name = _('Most commented')):
     post_list =  Post.published.annotate(total_comments = Count('comments')).order_by('-total_comments')[:count]
     return{'post_list': post_list, 'group_name': group_name}

@@ -2,6 +2,7 @@ from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin
 from django.contrib.auth.models import User
 from .models import Category, Post, Comment, Tag, PhotoGallery, Profile, Flatpage
+from django.utils.translation import gettext_lazy as _
 from django.forms import TextInput, Textarea
 from django.db import models
 
@@ -9,7 +10,7 @@ class ProfileInline(admin.StackedInline):
     """ Stacked inline profile extending the user model to store additional user information """
     model = Profile
     can_delete = False
-    verbose_name_plural = 'Blog User Profile'
+    verbose_name_plural = _('Blog User Profile')
     fk_name = 'user'
 
 class CustomUserAdmin(UserAdmin):
@@ -114,7 +115,7 @@ class CommentAdmin(admin.ModelAdmin):
         else:
             message_bit = str(rows_updated) +" comments were "
         self.message_user(request, "%s successfully approved." % message_bit)
-    make_approved.short_description = "Approve selected comments"
+    make_approved.short_description = _("Approve selected comments")
     
     def make_rejected(self, request, queryset):
         """ Reject selected comments """
@@ -125,6 +126,6 @@ class CommentAdmin(admin.ModelAdmin):
         else:
             message_bit = str(rows_updated) +" comments were "
         self.message_user(request, "%s successfully rejected." % message_bit)
-    make_rejected.short_description = "Reject selected comments"
+    make_rejected.short_description = _("Reject selected comments")
     
 admin.site.register(Comment, CommentAdmin)

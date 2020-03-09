@@ -1,6 +1,7 @@
 {% extends "blog/__l_base.html" %}
+{% load i18n %}
 {% load blog_tags %}
-{% block title %}Discussion: {{ post.get_meta_title|capfirst }} - {{ block.super }}{% endblock %}
+{% block title %}{% trans "Discussion" %}: {{ post.get_meta_title|capfirst }} - {{ block.super }}{% endblock %}
 {% block meta_description %}{{ post.get_meta_description }}{% endblock %}
 {% block extra_head %}
 <meta name="robots" content="noindex" />
@@ -11,7 +12,7 @@
         
     <div class="card mt-0 mb-5">
         <div class="card-body pb-3">
-            <h1 class="h2">Discussion</h1>
+            <h1 class="h2">{% trans "Discussion" %}</h1>
         </div>
     </div>
         

@@ -1,7 +1,8 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
-from django.views.generic import ListView
 from .models import Post, Comment, Category, User, Tag, Flatpage
+from django.utils.translation import gettext_lazy as _
+from django.views.generic import ListView
 from .forms import CommentForm, SearchForm
 from django.contrib import messages
 from django.urls import reverse
@@ -30,12 +31,12 @@ def post_search(request):
 
             # String too short
             if(len(query) <= 3):
-                messages.error(request, 'The search string was too short, please try again.')
+                messages.error(request, _('The search string was too short, please try again.'))
                 response = redirect(reverse('blog:post_list'))
                 return response
 
-            meta_title = 'Search results for "'+ query +'"'
-            meta_description = 'Search results for "'+ query +'"'
+            meta_title = _('Search results for %(query)s') % {'query': query}
+            meta_descriptions = _('Search results in posts for %(query)s') % {'query': query}
             object_list = Post.objects.filter(Q(title__icontains=query) | Q(body__icontains=query))
             
     # Page and pagination

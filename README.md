@@ -9,6 +9,7 @@ A bootstrapped and complete blog engine that blends into django-admin and works 
 - Mark-down posts and flatpages
 - Multiple authors with bio and avatar
 - Moderated comments with gravatars and recaptcha
+- internationalization support (i18n)
 - Browseable categories and tags
 - Embeddable media galleries
 - Built-in search engine
@@ -31,6 +32,20 @@ A bootstrapped and complete blog engine that blends into django-admin and works 
 - Django >= 2.2.6
 - Markdown
 - Hashlib
+
+## Languages
+Gettext files are available for the following languages:
+
+- English
+- Spanish
+- German (translation pending)
+- Italian (translation pending)
+- French (translation pending)
+- Russian (translation pending)
+- Japanese (translation pending)
+- Portuguese (translation pending)
+
+Kindly share if you create translations for these languages.
 
 ## Installation
 Create a directory and clone the project.
@@ -65,14 +80,46 @@ Use the admin site to add content: http://127.0.0.1:8000/admin.
 The above instructions will create a new Django project that will run the blog. If you did that, you can skip this section. If on the other hand, you want to include the blog in your existing application, then another course of action is needed. Add the following lines in your *settings.py*:
 
 ```
+# Site ID
 SITE_ID = 1 
+
+# Apps
 INSTALLED_APPS = (
     # ...
     'django.contrib.staticfiles',
     'django.contrib.sitemaps',
     'blog',
 )
+
+# Middleware
+MIDDLEWARE = [
+    # ...
+    'django.middleware.locale.LocaleMiddleware',  # Between session and common
+    # ...
+]
+
+# Internationalization
+LANGUAGE_CODE = 'en' # Changed to en from en-us
+TIME_ZONE = 'UTC'
+USE_I18N = True
+USE_L10N = True
+USE_TZ = True
+LANGUAGES = (
+    ('en', _('English')),
+    ('es', _('Spanish')),
+    ('de', _('German')),
+    ('it', _('Italian')),
+    ('fr', _('French')),
+    ('ru', _('Russian')),
+    ('ja', _('Japanese')),
+    ('pt', _('Portuguese')),
+)
+LOCALE_PATHS = (os.path.join(BASE_DIR, 'locale/'),)
+
+# Static
 STATIC_URL = '/static/'
+
+# Media
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')
 MEDIA_URL = '/media/'
 ```
@@ -122,13 +169,12 @@ The templates are organized in three categories: extendable templates, includabl
 - *templates/_pagination.html* => Includable template to display pagination links.
 
 ## To-do
+- Translations for german, italian, french, russian, portuguese and japanese
 - Ability to ban commentators
 - Posting ping notifications
 - Archive browsing by year and month
 - Nested comments
 - Theming support
-- Contact form
-- Newsletter
 
 ## Authors
 **Arturo Lopez Perez** - Main and sole developer (so far).
