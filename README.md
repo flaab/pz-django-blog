@@ -45,7 +45,7 @@ Gettext files are available for the following languages:
 - Japanese (translation pending)
 - Portuguese (translation pending)
 
-Kindly share if you create translations for these languages.
+Kindly share the *.po files* if you create translations for these languages.
 
 ## Installation
 Create a directory and clone the project.
