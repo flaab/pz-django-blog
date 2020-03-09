@@ -80,6 +80,10 @@ Use the admin site to add content: http://127.0.0.1:8000/admin.
 The above instructions will create a new Django project that will run the blog. If you did that, you can skip this section. If on the other hand, you want to include the blog in your existing application, then another course of action is needed. Add the following lines in your *settings.py*:
 
 ```
+# Requirements
+from django.contrib.messages import constants as messages
+from django.utils.translation import gettext_lazy as 
+
 # Site ID
 SITE_ID = 1 
 
