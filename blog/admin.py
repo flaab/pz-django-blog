@@ -62,20 +62,6 @@ class CategoryAdmin(admin.ModelAdmin):
     }
 admin.site.register(Category, CategoryAdmin)
 
-class PostAdmin(admin.ModelAdmin):
-    """ Admin config class for the Post model """
-    list_display = ('title', 'category','author','status')
-    list_filter = ('status', 'created', 'publish', 'author','category')
-    search_fields = ('title', 'body')
-    prepopulated_fields = {'slug': ('title',)}
-    raw_id_fields = ('author','gallery')
-    date_hierarchy = 'publish'
-    ordering = ['status', '-publish']
-    filter_horizontal = ('tags',)
-    formfield_overrides = {
-        models.CharField: {'widget': TextInput(attrs={'size':'80%'})},
-    }
-admin.site.register(Post, PostAdmin)
 
 class FlatpageAdmin(admin.ModelAdmin):
     """ Admin config class for flat pages """
@@ -97,6 +83,8 @@ class CommentAdmin(admin.ModelAdmin):
     list_filter  = ('active','created','updated')
     search_fields = ('name', 'email','body')
     ordering = ['active','created']
+    list_editable = ['active',]
+    raw_id_fields = ('post',)
     
     formfield_overrides = {
         models.CharField: {'widget': TextInput(attrs={'size':'80%'})},
@@ -127,5 +115,19 @@ class CommentAdmin(admin.ModelAdmin):
             message_bit = str(rows_updated) +" comments were "
         self.message_user(request, "%s successfully rejected." % message_bit)
     make_rejected.short_description = _("Reject selected comments")
-    
 admin.site.register(Comment, CommentAdmin)
+
+class PostAdmin(admin.ModelAdmin):
+    """ Admin config class for the Post model """
+    list_display = ('title', 'category','author','status')
+    list_filter = ('status', 'created', 'publish', 'author','category')
+    search_fields = ('title', 'body')
+    prepopulated_fields = {'slug': ('title',)}
+    raw_id_fields = ('author','gallery')
+    date_hierarchy = 'publish'
+    ordering = ['status', '-publish']
+    filter_horizontal = ('tags',)
+    formfield_overrides = {
+        models.CharField: {'widget': TextInput(attrs={'size':'80%'})},
+    }
+admin.site.register(Post, PostAdmin)
