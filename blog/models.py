@@ -4,10 +4,10 @@ from django.contrib.auth.models import User
 from django.db.models.signals import post_save, post_delete
 from django.utils.translation import gettext_lazy as _
 from django.utils.safestring import mark_safe
-from django.dispatch import receiver
-from django.urls import reverse
 from django.utils.html import strip_tags
+from django.dispatch import receiver
 from django.conf import settings
+from django.urls import reverse
 from django import forms
 import hashlib
 
@@ -15,6 +15,7 @@ import hashlib
 
 class Profile(models.Model):
     """ User profile to extend the user model with bio and avatar """
+
     user = models.OneToOneField(User, on_delete = models.CASCADE, verbose_name = _('User'))
     bio = models.TextField(max_length=500, blank = True, null = True, help_text = _('Public bio for the Blog'))
     avatar = models.ImageField(upload_to ='profile/%Y/%m/%d/', blank = True, null = True, 
@@ -333,7 +334,7 @@ class Comment(models.Model):
     body = models.TextField(verbose_name = _('Body'))
     created = models.DateTimeField(auto_now_add = True, verbose_name = _('Created')) 
     updated = models.DateTimeField(auto_now = True, verbose_name = _('Updated'))
-    active = models.BooleanField(default = False)
+    active = models.BooleanField(default = False, verbose_name = _('Active'))
 
     def approve(self):
         """ Approves this comment to be shown in the website """
