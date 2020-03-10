@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-03-09 22:00+0100\n"
+"POT-Creation-Date: 2020-03-10 15:58+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -150,7 +150,7 @@ msgstr ""
 msgid "Draft"
 msgstr ""
 
-#: blog/models.py:189 blog/models.py:272
+#: blog/models.py:189 blog/models.py:208 blog/models.py:272
 msgid "Published"
 msgstr ""
 
@@ -196,6 +196,7 @@ msgid "Status"
 msgstr ""
 
 #: blog/models.py:211 blog/models.py:366
+#: blog/templates/blog/post_detail.html:174
 msgid "Comments"
 msgstr ""
 
@@ -255,7 +256,7 @@ msgstr ""
 msgid "Flatpages"
 msgstr ""
 
-#: blog/models.py:365
+#: blog/models.py:365 blog/templates/blog/post_detail.html:176
 msgid "Comment"
 msgstr ""
 
@@ -303,7 +304,7 @@ msgstr ""
 msgid "View all posts by"
 msgstr ""
 
-#: blog/templates/blog/post_detail.html:182
+#: blog/templates/blog/post_detail.html:186
 msgid "Go to discussion"
 msgstr ""
 
@@ -328,16 +329,16 @@ msgstr ""
 msgid "Most commented"
 msgstr ""
 
-#: blog/views.py:34
+#: blog/views.py:33
 msgid "The search string was too short, please try again."
 msgstr ""
 
-#: blog/views.py:38
+#: blog/views.py:37
 #, python-format
 msgid "Search results for %(query)s"
 msgstr ""
 
-#: blog/views.py:39
+#: blog/views.py:38
 #, python-format
 msgid "Search results in posts for %(query)s"
 msgstr ""

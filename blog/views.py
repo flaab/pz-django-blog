@@ -5,12 +5,11 @@ from django.utils.translation import gettext_lazy as _
 from django.views.generic import ListView
 from .forms import CommentForm, SearchForm
 from django.contrib import messages
+from .decorators import check_recaptcha
 from django.urls import reverse
 from django.db.models import Count
 from django.db.models import Q
 from django.apps import apps
-import json
-import urllib
 
 #------------------------------------------
 
@@ -206,6 +205,7 @@ def flatpage(request, slug):
 
 #------------------------------------------
 
+@check_recaptcha
 def post_detail(request, year, month, day, post):
     """ Displays a post or raises a 404 error """
 
@@ -230,26 +230,12 @@ def post_detail(request, year, month, day, post):
         # Instance comment form
         comment_form = CommentForm(data = request.POST)
 
-        # Begin reCAPTCHA validation
-        if(recaptcha_enabled): 
-            recaptcha_response = request.POST.get('g-recaptcha-response')
-            url = 'https://www.google.com/recaptcha/api/siteverify'
-            values = {
-                'secret': apps.get_app_config('Blog').recaptcha_secret,
-                'response': recaptcha_response
-            }
-            data = urllib.parse.urlencode(values).encode()
-            req =  urllib.request.Request(url, data=data)
-            response = urllib.request.urlopen(req)
-            result = json.loads(response.read().decode())
-        else:   # No validation
-            result = {'success': True}
-
         # Form must be valid and recaptcha too
-        if(comment_form.is_valid() and result['success']):
+        if(comment_form.is_valid() and request.recaptcha_is_valid):
             new_comment = comment_form.save(commit = False)
             new_comment.post = post 
             new_comment.save()
+
     # Not received comment yet
     else:
         comment_form = CommentForm()

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-03-09 22:00+0100\n"
+"POT-Creation-Date: 2020-03-10 15:58+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -148,7 +148,7 @@ msgstr "Galería creada el"
 msgid "Draft"
 msgstr "Borrador"
 
-#: blog/models.py:189 blog/models.py:272
+#: blog/models.py:189 blog/models.py:208 blog/models.py:272
 msgid "Published"
 msgstr "Publicado"
 
@@ -194,6 +194,7 @@ msgid "Status"
 msgstr "Estado"
 
 #: blog/models.py:211 blog/models.py:366
+#: blog/templates/blog/post_detail.html:174
 msgid "Comments"
 msgstr "Comentarios"
 
@@ -253,7 +254,7 @@ msgstr "Páginas estática"
 msgid "Flatpages"
 msgstr "Páginas estáticas"
 
-#: blog/models.py:365
+#: blog/models.py:365 blog/templates/blog/post_detail.html:176
 msgid "Comment"
 msgstr "Comentario"
 
@@ -267,11 +268,11 @@ msgstr "Última"
 
 #: blog/templates/blog/_comment_form.html:6
 msgid "Thank you!"
-msgstr "Gracias!"
+msgstr "¡Gracias!"
 
 #: blog/templates/blog/_comment_form.html:7
 msgid "Your comment has been sent and it is pending moderation."
-msgstr "Tu comentario ha sido enviado y se encuentra pendiente de moderación."
+msgstr "Tu comentario ha sido enviado y está endiente de moderación."
 
 #: blog/templates/blog/_comment_form.html:9
 msgid "Leave a comment"
@@ -301,7 +302,7 @@ msgstr "Publicado por"
 msgid "View all posts by"
 msgstr "Ver todas las entradas de"
 
-#: blog/templates/blog/post_detail.html:182
+#: blog/templates/blog/post_detail.html:186
 msgid "Go to discussion"
 msgstr "Ir a discusión"
 
@@ -326,16 +327,16 @@ msgstr "Entradas recientes"
 msgid "Most commented"
 msgstr "Más comentadas"
 
-#: blog/views.py:34
+#: blog/views.py:33
 msgid "The search string was too short, please try again."
 msgstr "La cadena de búsqueda es demasiado corta, inténtalo de nuevo."
 
-#: blog/views.py:38
+#: blog/views.py:37
 #, python-format
 msgid "Search results for %(query)s"
 msgstr "Resultados de búsqueda para %(query)s"
 
-#: blog/views.py:39
+#: blog/views.py:38
 #, python-format
 msgid "Search results in posts for %(query)s"
 msgstr "Resultados de búsqueda en entradas para %(query)s"

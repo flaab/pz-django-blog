@@ -170,7 +170,11 @@
         <div class="card mt-0 mb-5">
             <div class="card-body pl-5 pr-5 pb-2 pt-4">
                 <h2 class="mb-5 mt-3">
-                {{ comment_count }} comment{{ comment_count|pluralize }}
+                {% if comment_count > 1 %}
+                    {{ comment_count }} {% trans "Comments" %}
+                {% else %}
+                    {{ comment_count }} {% trans "Comment" %}
+                {% endif %}
                 </h2>
                 <ul class="list-unstyled">
                 {% for comment in comments %}
