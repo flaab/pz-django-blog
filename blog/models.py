@@ -18,7 +18,8 @@ class Profile(models.Model):
 
     user = models.OneToOneField(User, on_delete = models.CASCADE, verbose_name = _('User'))
     bio = models.TextField(max_length=500, blank = True, null = True, help_text = _('Public bio for the Blog'))
-    avatar = models.ImageField(upload_to ='profile/%Y/%m/%d/', blank = True, null = True, 
+    avatar = models.ImageField(upload_to ='profile/%Y/%m/%d/', blank = True, null = True,
+                               verbose_name = _('Avatar'),
                                help_text = _('Please upload an squared image'))
 
     class Meta:
